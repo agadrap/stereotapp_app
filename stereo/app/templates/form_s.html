@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+{% load cache %}
+{% block content %}
+    {% cache 3600 form user_id_cookie %}
+    <form action="" method="POST" id="form_s">
+    {% csrf_token %}
+        {% for object in questions_s %}
+             <h1>{{ object.question }}</h1>
+            <input type="hidden" name="question_id" value="{{ object.id }}">
+        {% endfor %}
+
+    {% if questions_s.has_other_pages %}
+    <ul class="pagination">
+        {% if questions_s.has_next %}
+            <li class="page-item"><a class="page-link" style="background-color: deeppink; color: black" href="?page={{ questions_s.next_page_number }}">Women</a></li>
+            <li class="page-item"><a class="page-link" style="background-color: deepskyblue; color: black;" href="?page={{ questions_s.next_page_number }}">Men</a></li>
+
+        {% else %}
+            <button type="submit" form="form_s" class="page-item" name="answer" value="1">
+                <a class="page-link" style="background-color: deeppink; color: black" href="{% url "submit-s" %}">Women</a>
+            </button>
+            <button type="submit" form="form_s" class="page-item" name="answer" value="2">
+                <a class="page-link" style="background-color: deepskyblue; color: black;" href="{% url "submit-s" %}">Men</a>
+            </button>
+        {% endif %}
+    </ul>
+    {% endif %}
+    </form>
+{% endcache %}
+{% endblock %}

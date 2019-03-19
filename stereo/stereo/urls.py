@@ -15,7 +15,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from app.views import Home, StereotypeQ, PersonalQ, TemplateTest, SubmitStereo, SubmitPersonal, load_countries
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('',Home.as_view()),
+    path('sform/',StereotypeQ.as_view(), name='s_form'),
+    path('pform/', PersonalQ.as_view(), name='p_form'),
+    path('test/', TemplateTest.as_view()),
+    path('submits/', SubmitStereo.as_view(), name='submit-s'),
+    path('submitp/', SubmitPersonal.as_view(), name='submit-p'),
+
+    path('ajax/load-cities/', load_countries, name='ajax_load_countries'),
 ]
+
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+urlpatterns += staticfiles_urlpatterns()

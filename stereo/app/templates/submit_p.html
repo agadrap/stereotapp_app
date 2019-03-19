@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+    <h1>That's it {{ name }}!</h1>
+    <h5>Thank you very much for choosing to delegate your time into completing this survey.</h5>
+    <h2>It means a great deal to us.</h2>
+    <p>Now comes the fun part - below you can review the results:</p>
+    <ul>
+    <p>3 analysis are available to you right now:</p>
+        <li>Overall stereotype data based on #number of participants</li>
+        <li>Overall society snap based on all second survey's answers</li>
+        <li>How your personal answers stand against both</li>
+    </ul>
+    <h2>Number of participants: {{ number }}</h2>
+
+    <div>
+        <ul>If you wish we can send you also results for following benchmarks:
+            <li>10 000 participants</li>
+            <li>100 000 participants</li>
+            <li>1 000 000 participants</li>
+        </ul>
+        <p>If the answer is YES, please provide us your email address and nationality below.</p>
+        <p>If you don't wish to share your nationality, you will get grouped results.</p>
+
+    <div class="card-body" align="center">
+                <form action="" method="POST" id="participantForm" data-countries-url="{% url "ajax_load_countries" %}" novalidate>
+                {% csrf_token %}
+                        {{ form.as_p }}
+
+
+                    <button type="submit" class="btn btn-secondary btn-lg">
+                        <a href="{% url "s_form" %}" style="color: ghostwhite">Send</a>
+                    </button>
+                </form>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script>
+    $("#id_continent").change(function () {
+      var url = $("#participantForm").attr("data-countries-url");  // get the url of the `load_cities` view
+      var continentId = $(this).val();  // get the selected country ID from the HTML input
+
+      $.ajax({                       // initialize an AJAX request
+        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+        data: {
+          'continent': continentId       // add the country id to the GET parameters
+        },
+        success: function (data) {   // `data` is the return of the `load_cities` view function
+          $("#id_country").html(data);  // replace the contents of the city input with the data that came from the server
+        }
+      });
+
+    });
+  </script>
+
+{% endblock %}

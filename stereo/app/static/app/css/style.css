@@ -1,0 +1,115 @@
+/* LOADER */
+.loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  width: 150px;
+  height: 150px;
+  margin: -75px 0 0 -75px;
+  border: 16px solid lightgray;
+  border-radius: 50%;
+  border-top: 16px solid deeppink;
+  border-bottom: 16px solid deepskyblue;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% {-webkit-transform: rotate(0deg);}
+  100% {-webkit-transform: rotate(360deg);}
+}
+@keyframes spin {
+  0% { transform: rotate(0deg);}
+  100% {transform: rotate(360deg);}
+}
+
+.animate-bottom {
+  position: relative;
+  -webkit-animation-name: animatebottom;
+  -webkit-animation-duration: 1s;
+  animation-name: animatebottom;
+  animation-duration: 1s
+}
+
+@-webkit-keyframes animatebottom {
+  from { bottom:-100px; opacity:0 }
+  to { bottom:0px; opacity:1 }
+}
+
+@keyframes animatebottom {
+  from{ bottom:-100px; opacity:0 }
+  to{ bottom:0; opacity:1 }
+}
+
+.myDiv {
+  display: none;
+  text-align: center;
+}
+
+.pace {
+  -webkit-pointer-events: none;
+  pointer-events: none;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+.pace.pace-inactive .pace-progress {
+  display: none;
+}
+
+.pace .pace-progress {
+  position: fixed;
+  z-index: 2000;
+  top: 0;
+  right: 0;
+  height: 5rem;
+  width: 5rem;
+
+  -webkit-transform: translate3d(0, 0, 0) !important;
+  -ms-transform: translate3d(0, 0, 0) !important;
+  transform: translate3d(0, 0, 0) !important;
+}
+
+.pace .pace-progress:after {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: .5rem;
+  content: attr(data-progress-text);
+  font-family: "Helvetica Neue", sans-serif;
+  font-weight: 100;
+  font-size: 5rem;
+  line-height: 1;
+  text-align: right;
+  color: rgba(0, 0, 0, 0.19999999999999996);
+}
+/* SPLITING THE PAGE */
+
+html, body {height: 100%; }
+
+.container {
+  min-height: 100%;
+  overflow:hidden;
+}
+
+#anime, #content {
+	margin-bottom: -9999px;
+	padding-bottom: 9999px;
+}
+
+#anime {
+  background: linear-gradient(90deg, deeppink 50%, deepskyblue 50%);
+  width: 172px;
+  float: left;
+  margin-right: 20px;
+}
+
+#content {
+  background: white;
+  width: 672px;
+  float: left;
+  margin-right: 20px;
+}

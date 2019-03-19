@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+    {% for object in questions_s %}
+    <h1>{{ object.question }}</h1>
+    {% endfor %}
+
+    {% if questions_s.has_other_pages %}
+    <ul class="pagination">
+        {% if questions_s.has_next %}
+            <li class="page-item"><a class="page-link" style="background-color: deeppink; color: black" href="?page={{ questions_s.next_page_number }}">Women</a></li>
+            <li class="page-item"><a class="page-link" style="background-color: deepskyblue; color: black;" href="?page={{ questions_s.next_page_number }}">Men</a></li>
+
+        {% else %}
+            <li class="page-item"><a class="page-link" style="background-color: deeppink; color: black" href="{% url "submit-s" %}">Women</a></li>
+            <li class="page-item"><a class="page-link" style="background-color: deepskyblue; color: black;" href="{% url "submit-s" %}">Men</a></li>
+
+        {% endif %}
+    </ul>
+    {% endif %}
+
+{% endblock %}

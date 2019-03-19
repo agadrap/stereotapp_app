@@ -67,6 +67,7 @@ TEMPLATES = [
         },
     },
 ]
+#[os.path.join(BASE_DIR, 'app/templates')]
 
 WSGI_APPLICATION = 'stereo.wsgi.application'
 
@@ -118,4 +119,24 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
+STATICFILES_DIRS = (
+    # Put strings here, like "/home/html/static" or "C:/www/django/static".
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
+    os.path.join(BASE_DIR,'static'),
+)
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+)
+
 STATIC_URL = '/static/'
+
+STATIC_ROOT = ''
+
+
+
+
+
+

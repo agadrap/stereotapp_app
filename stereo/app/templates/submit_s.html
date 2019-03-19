@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+    <h1>Congrats!</h1>
+    <div>
+        <h5>We are half way there! Questions you have just answered were suppose to reveal your stereotypical thinking.</h5>
+    </div>
+    <div>
+        <h5>But now we need you to leave all stereotypes behind you. Throw them out the window, will ya? </h5>
+    </div>
+    <div>
+        <h5>We want you to focus on yourself.</h5>
+    </div>
+    <p></p>
+    <div>
+        <h6>We believe that <font size="6">YOU</font> are unique and that beauty lies within uniqueness.</h6>
+        <p></p>
+        <h6>So please answer now all these questions considering</h6>
+        <h6>
+            <p><font size="6">YOURSELF,</p>
+            <p>YOUR</font> thoughts and </p>
+            <p><font size="6">YOUR</font> personal experiences.</p>
+        </h6>
+    </div>
+    <button type="button" class="btn btn-dark">
+    <a href="{% url "p_form" %}" style="color: ghostwhite">Start</a>
+    </button>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+        <img src="{% static "app/images/logo.png" %}" class="rounded mx-auto d-block" alt="Uups!">
+        <div class="card-body" align="center">
+                <form action="" method="POST">
+                {% csrf_token %}
+                    <small id="help_text" class="form-text text-muted">It's nice to meet you!</small>
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-secondary btn-lg">
+                        <a style="color: ghostwhite">Let's roll!</a>
+                    </button>
+                </form>
+        </div>
+
+{% endblock %}
