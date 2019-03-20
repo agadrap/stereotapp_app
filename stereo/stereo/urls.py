@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path
 from app.views import Home, StereotypeQ, PersonalQ, TemplateTest, SubmitStereo, SubmitPersonal, load_countries
@@ -23,7 +24,7 @@ urlpatterns = [
     path('sform/',StereotypeQ.as_view(), name='s_form'),
     path('pform/', PersonalQ.as_view(), name='p_form'),
     path('test/', TemplateTest.as_view()),
-    path('submits/', SubmitStereo.as_view(), name='submit-s'),
+    path('submits/<int:answer>', SubmitStereo.as_view(), name='submit-s'),
     path('submitp/', SubmitPersonal.as_view(), name='submit-p'),
 
     path('ajax/load-cities/', load_countries, name='ajax_load_countries'),

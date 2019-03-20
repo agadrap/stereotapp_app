@@ -14,6 +14,9 @@ class Home(View):
 
     def get(self,request):
         user_id_cookie = request.COOKIES.get('user_id_cookie')
+        request.session['answers'] = ['']
+        request.session['answerp'] = ['']
+
         if user_id_cookie is not None:
             #we have this user
             user = Participant.objects.get(user_id=user_id_cookie)
@@ -49,6 +52,15 @@ class Home(View):
 class StereotypeQ(View):
     def get(self,request):
         user_id_cookie = request.COOKIES.get('user_id_cookie')
+
+        answer = request.GET.get("answer")
+
+        if not 'answers' in request.session or not request.session['answers']:
+            request.session['answers'] = [answer]
+        else:
+            answer_list = request.session['answers']
+            answer_list.append(answer)
+            request.session['answers'] = answer_list
         
         if user_id_cookie is not None:
             # we have this user
@@ -72,17 +84,6 @@ class StereotypeQ(View):
             form = ParticipantForm()
             ctx = {'form': form}
             return render(request, 'welcome_page.html', ctx)
-
-
-    def post(self,request):
-        questions_s = StereotypeQuestions.objects.all()
-        count = len(questions_s)
-
-        question_id = int(request.POST.get('question_id'))
-        answer = int(request.POST.get('answer'))
-
-        #if not request.session["cache"]: request.session["cache"] = []
-        #request.session["cache"].append(answer)
 
 class PersonalQ(View):
     def get(self,request):
@@ -110,8 +111,30 @@ class TemplateTest(View):
         return render(request,'template_test.html',ctx)
 
 class SubmitStereo(View):
-    def get(self,request):
-        ctx={}
+    def get(self,request,answer):
+        user_id_cookie = request.COOKIES.get('user_id_cookie')
+
+        answer_list = request.session['answers']
+        answer_list.append(f"{answer}")
+        request.session['answers'] = answer_list
+
+        stereo_answers = []
+        for item in answer_list:
+            if item == '1' or item == '2':
+                stereo_answers.append(item)
+
+        #participant | question personal | answer int
+        user = Participant.objects.get(user_id=user_id_cookie)
+        questions = StereotypeQuestions.objects.all()
+
+        if len(stereo_answers) == 56:
+            for index, value in enumerate(stereo_answers):
+                value = int(value)
+                q = questions[index]
+                AnswersStereo.objects.create(participant=user,question_stereo=q,answer_stereo=value)
+        else:
+            pass # add error message with going back to start page & trying again from homepage
+        ctx = {}
         return render(request,'submit_s.html',ctx)
 
 class SubmitPersonal(View):
