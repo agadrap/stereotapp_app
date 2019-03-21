@@ -27,12 +27,14 @@
                 <form action="" method="POST" id="participantForm" data-countries-url="{% url "ajax_load_countries" %}" novalidate>
                 {% csrf_token %}
                         {{ form.as_p }}
-
-
                     <button type="submit" class="btn btn-secondary btn-lg">
-                        <a href="{% url "s_form" %}" style="color: ghostwhite">Send</a>
+                        <a href="{% url "results" %}" style="color: ghostwhite">Send</a>
                     </button>
                 </form>
+        <p>If you don't want - that's ok - checkout what we have so far:</p>
+        <button type="button" class="btn btn-secondary btn-lg">
+            <a href="{% url "results" %}"style="color: ghostwhite">See current results</a>
+        </button>
 
     </div>
 

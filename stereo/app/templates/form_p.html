@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-    <form action="" method="POST" id="form_p">
+    <form action="" method="GET" id="form_p">
     {% csrf_token %}
         {% for object in questions_p %}
             <h1>{{ object.question }}</h1>
@@ -11,15 +11,19 @@
     {% if questions_p.has_other_pages %}
     <ul class="pagination">
         {% if questions_p.has_next %}
-            <li class="page-item"><a class="page-link" style="background-color: #303236; color: ghostwhite" href="?page={{ questions_p.next_page_number }}">Yes</a></li>
-            <li class="page-item"><a class="page-link" style="background-color: #303236; color: ghostwhite;" href="?page={{ questions_p.next_page_number }}">No</a></li>
+            <button class="button" form="form_p">
+                <a class="page-link" style="background-color: #303236; color: ghostwhite" href="?page={{ questions_p.next_page_number }}&answer=True">Yes</a>
+            </button>
+            <button class="button" form="form_p">
+                <a class="page-link" style="background-color: #303236; color: ghostwhite;" href="?page={{ questions_p.next_page_number }}&answer=False">No</a>
+            </button>
 
         {% else %}
-            <button type="submit" form="form_p" class="page-item">
-                <a class="page-link" style="background-color: #303236; color: ghostwhite;" href="{% url "submit-p" %}">Yes</a>
+            <button type="submit" form="form_p">
+                <a class="page-link" style="background-color: #303236; color: ghostwhite;" href="{% url "submit-p" answer=True%}">Yes</a>
             </button>
-            <button type="submit" form="form_p" class="page-tem">
-                <a class="page-link" style="background-color: #303236; color: ghostwhite;" href="{% url "submit-p" %}">No</a>
+            <button type="submit" form="form_p">
+                <a class="page-link" style="background-color: #303236; color: ghostwhite;" href="{% url "submit-p" answer=False%}">No</a>
             </button>
 
         {% endif %}

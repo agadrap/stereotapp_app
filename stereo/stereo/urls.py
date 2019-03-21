@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path
-from app.views import Home, StereotypeQ, PersonalQ, TemplateTest, SubmitStereo, SubmitPersonal, load_countries
+from app.views import Home, StereotypeQ, PersonalQ, TemplateTest, SubmitStereo, SubmitPersonal, load_countries, Results
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,7 +25,8 @@ urlpatterns = [
     path('pform/', PersonalQ.as_view(), name='p_form'),
     path('test/', TemplateTest.as_view()),
     path('submits/<int:answer>', SubmitStereo.as_view(), name='submit-s'),
-    path('submitp/', SubmitPersonal.as_view(), name='submit-p'),
+    path('submitp/<str:answer>', SubmitPersonal.as_view(), name='submit-p'),
+    path('results', Results.as_view(), name='results'),
 
     path('ajax/load-cities/', load_countries, name='ajax_load_countries'),
 ]

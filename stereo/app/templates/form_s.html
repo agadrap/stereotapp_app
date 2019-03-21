@@ -5,16 +5,15 @@
     {% csrf_token %}
         {% for object in questions_s %}
              <h1>{{ object.question }}</h1>
-            <input type="hidden" name="question_id" value="{{ object.id }}">
         {% endfor %}
 
     {% if questions_s.has_other_pages %}
     <ul class="pagination">
         {% if questions_s.has_next %}
-            <button class="submit" form="form_s">
+            <button type="button" form="form_s">
                 <a class="page-link" style="background-color: deeppink; color: black" href="?page={{ questions_s.next_page_number }}&answer=1">Women</a>
             </button>
-            <button class="submit" form="form_s">
+            <button type="button" form="form_s">
                 <a class="page-link" style="background-color: deepskyblue; color: black;" href="?page={{ questions_s.next_page_number }}&answer=2">Men</a>
             </button>
 

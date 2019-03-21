@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <div>
+        <p align="right" style="font-size: xx-large">{{ number }} people contributed.</p>
+    <p align="right"><strong style="color: deeppink">{{ perc_f }}%</strong>
+        <strong> / </strong>
+        <strong style="color: deepskyblue">{{ perc_m }}%</strong>
+    </p>
+    </div>
+
+    <table class="table table-sm">
+    <thead>
+        <tr class="row">
+            <th class="col-3" scope="row">Stereotype</th>
+            <th class="col-6" scope="row">Question</th>
+            <th class="col-3" scope="row">Individual</th>
+        </tr>
+    </thead>
+    {% for question_s, answer_s, percentage_s, question_p, answer_p, m_percentage_p, w_percentage_p in result_list %}
+        <tr class="row">
+            <td class="col-3" scope="row">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="{{ percentage_s }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ percentage_s }}%;background-color: {{ color }}"></div>
+                </div>
+                <p>Women</p>
+            </td>
+            <td class="col-6" scope="row">
+                <p>{{ question_s }} /</p><p>{{ question_p }}</p>
+            </td>
+            <td class="col-3" scope="row">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="{{ w_percentage_p }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ w_percentage_p }}%;background-color: deeppink"></div>
+                </div>
+                <p>Yes</p>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="{{ m_percentage_p }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ m_percentage_p }}%;background-color: deepskyblue"></div>
+                </div>
+            </td>
+        </tr>
+    {% endfor %}
+    </table>
+
+{% endblock %}
